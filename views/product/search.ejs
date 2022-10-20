@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>카테고리</title>
+    <%-include("../link.ejs")%>
+    <link rel="stylesheet" href="/static/css/product/categories.css" />
+    <!-- 폰트어썸 -->
+    <script
+      src="https://kit.fontawesome.com/a766c546f2.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- 페이지네이션 기능 연결 시작 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"
+    />
+    <!-- 페이지네이션 기능 연결 끝 -->
+  </head>
+  <body>
+    <%-include("../main/navbar.ejs")%>
+    <div class="all-body">
+      <!-- 페이지네이션 기능 시작 -->
+      <div class="hero-header">
+        <h3 class="hero-header-h3">새로운 중고물품</h3>
+      </div>
+      <div class="products">
+        <br />
+        <br />
+
+        <div class="onestnavsort">
+          <div class="twostnavsort">
+            <div class="sortnavleft">
+              <button onclick="handleOnLow()">낮은가격순</button>
+            </div>
+            <div class="sortnav">
+              <button onclick="handleOnHigh()">높은가격순</button>
+            </div>
+            <div class="sortnav">
+              <button onclick="handleOnNew()">최신등록순</button>
+            </div>
+          </div>
+          <div class="threestnavsort">
+            <select
+              class="filterSelect"
+              id="mySelect"
+              onchange="myFunction(this)"
+            >
+              <option value="4">4개씩 보기</option>
+              <option value="8" selected>8개씩 보기</option>
+            </select>
+          </div>
+        </div>
+        <br />
+        <!-- 받아온 데이터 -->
+        <a href="#" class="products"></a>
+        <div class="pagenation-container">
+          <div
+            class="row row-cols-3 row-cols-md-4 g-4"
+            id="data-container"
+          ></div>
+        </div>
+        <br />
+        <div id="pagination"></div>
+        <br />
+        <br />
+      </div>
+    </div>
+    <!-- 페이지네이션 기능 끝 -->
+
+    <%-include("../main/footer.ejs")%>
+
+    <script src="/static/js/product/categories.js"></script>
+    <script>
+      function pgn(order, size) {
+        let container = $("#pagination");
+        // 페이지네이션 깨트리는곳
+
+        container.empty();
+        const search_item = "<%=search_item%>";
+
+        // 엑시오스 데이터 불러오는곳
+        axios({
+          url: `/api/search/${search_item}`,
+          method: "post",
+          data: {
+            search_item: search_item,
+            user_id: sessionStorage.getItem("id"),
+          },
+        }).then((result) => {
+          let dataSource = result.data.map((el) => {
+            // 3자리마다 가격에 , 집어넣기
+            var pricecom = `${el.price}`;
+            var pricecom2 = pricecom
+              .toString()
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+            const categories = {
+              life: "생활/가전",
+              electro: "전자제품",
+              fashion: "패션/의류",
+              interior: "가구/인테리어",
+              book: "도서/음반/티켓",
+              food: "식품/잡화",
+              pet: "반려동물",
+            };
+            const img = el.img.split("..")[0];
+            return {
+              img: `<img src='${img}' class='card-img-top' alt='...' />`,
+              name: `<h5 class='card-title'>${el.title}</h5>`,
+              user_id: `<p class='card-text id'>${el.user_id}</p>`,
+              address: `<p class='card-text position'>${el.position}</p>`,
+              price: `<p class='card-text price'> ${pricecom2}원</p>`,
+              categories: `<p class='card-text elec'>${el.category_id}</p>`,
+              priceValue: el.price,
+              idnumValue: el.id,
+              // 카테고리 항목 변경(한글화)
+              categoryValue: `<p class='card-text elec'>${
+                categories[el.category_id]
+              }</p>`,
+              count: el.product_like_users.length,
+            };
+          });
+          if (order == "high")
+            dataSource.sort((a, b) => b.priceValue - a.priceValue);
+          else if (order == "low")
+            dataSource.sort((a, b) => a.priceValue - b.priceValue);
+          else if (order == "new")
+            dataSource.sort((a, b) => b.idnumValue - a.idnumValue);
+
+          container.pagination({
+            dataSource: dataSource,
+
+            pageSize: size,
+            callback: function (data, pagination) {
+              $("#data-container").html(createList(data));
+            },
+          });
+        });
+      }
+    </script>
+  </body>
+</html>

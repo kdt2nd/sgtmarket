@@ -1,0 +1,233 @@
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scene {
+  background: white;
+  height: 100vh;
+  position: relative;
+}
+
+#chatbox {
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(254, 254, 254, 0.18);
+  border-radius: 15px;
+  box-shadow: 0 10px 35px 0 rgba(54, 33, 0, 0.65);
+  color: black;
+  width: 70vw;
+  height: 80vh;
+  overflow: hidden;
+  padding: 20px 30px 50px 30px;
+  position: relative;
+  z-index: 1;
+}
+/* 화살표 css */
+.material-symbols-outlined {
+  color: #eb8d0081;
+  font-weight: 800;
+}
+
+.headerbox {
+  display: flex;
+  justify-content: center;
+}
+.logo {
+  height: 80px;
+}
+.chat__custom {
+  border-radius: 5px;
+  background: transparent;
+  cursor: pointer;
+  border: none;
+  /* box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
+    7px 7px 20px 0px rgba(0, 0, 0, 0.1), 4px 4px 5px 0px rgba(0, 0, 0, 0.1); */
+}
+.back-btn {
+  position: absolute;
+  left: 40px;
+  top: 40px;
+}
+/* 채팅방 목록 css 시작 */
+.area {
+  list-style: none;
+  width: 100%;
+  padding: 10px;
+  height: 90%;
+  overflow-y: scroll;
+}
+/* 스크롤바 css */
+.area::-webkit-scrollbar {
+  width: 10px;
+  display: none;
+}
+.area::-webkit-scrollbar-thumb {
+  /* background-color: rgba(239, 184, 255, 0.5); */
+  background-color: #eb8d002c;
+  border-radius: 10px;
+}
+.area::-webkit-scrollbar-track {
+  background-color: rgba(255, 199, 154, 0.338);
+  border-radius: 10px;
+  box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
+    7px 7px 20px 0px rgba(0, 0, 0, 0.1), 4px 4px 5px 0px rgba(0, 0, 0, 0.1);
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  height: 80px;
+  cursor: pointer;
+}
+.room {
+  display: flex;
+  width: 50%;
+}
+.imgbox {
+  width: 80px;
+}
+.imgbox img {
+  width: 80px;
+  height: 80px;
+}
+
+/* 닉네임 내용 묶음 */
+.roomnickcon {
+  overflow-x: hidden;
+  margin-left: 20px;
+}
+
+.roomnickname {
+  line-height: 35px;
+  color: gray;
+  font-weight: 700;
+  font-size: 18px;
+  color: #eb8d00;
+}
+
+.roomcontents {
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-break: break-all;
+  line-height: 35px;
+  color: gray;
+  font-size: small;
+  text-align: start;
+}
+
+/* 시간 타임 묶음 */
+.roomtimenoti {
+  width: 10%;
+  /* display: flex; */
+  /* justify-content: center;
+  align-items: center; */
+  /* text-align: center;
+  flex-direction: column; */
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;
+}
+
+.roomtime {
+  flex-grow: 1;
+  color: gray;
+  font-size: small;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.roomnotice {
+  flex-grow: 1;
+}
+
+.notibox {
+  width: 30px;
+  height: 25px;
+  border-radius: 20px;
+  background-color: #eb8d00;
+  color: #fff;
+  text-align: center;
+  margin: auto;
+}
+
+/* 채팅방 목록 css 끝 */
+
+/* 미디어쿼리 시작 */
+
+@media (max-width: 1032px) {
+  .roomtimenoti {
+    width: 30%;
+  }
+  .roomtime {
+    text-align: right;
+  }
+}
+
+@media (max-width: 633px) {
+  .imgbox {
+    width: 50px;
+  }
+  .imgbox > img {
+    width: 50px;
+  }
+  .roomnickcon {
+    width: 150px;
+  }
+  .roomtimenoti {
+    width: 30%;
+  }
+}
+
+@media (min-width: 633px) {
+}
+
+@media (max-width: 540px) {
+}
+
+@media (min-width: 540px) {
+}
+
+@media (max-width: 415px) {
+  .logo {
+    height: 48px;
+  }
+  .imgbox {
+    width: 30px;
+    height: 60px;
+  }
+  .imgbox > img {
+    width: 30px;
+    height: 60px;
+  }
+  .roomtime {
+    display: none;
+  }
+  .roomnickcon {
+    width: 100px;
+    height: 60px;
+  }
+  .roomtimenoti {
+    width: 30%;
+    height: 60px;
+  }
+  .room {
+    width: 80%;
+  }
+  .item {
+    height: 60px;
+  }
+  .roomnickname {
+    line-height: 30px;
+  }
+  .roomcontents {
+    line-height: 30px;
+  }
+}
+
+@media (min-width: 415px) {
+}

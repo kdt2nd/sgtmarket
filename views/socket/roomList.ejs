@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <%-include("../link.ejs")%>
+    <link rel="stylesheet" href="/static/css/socket/roomlist.css" />
+  </head>
+  <body>
+    <div class="scene flex">
+      <main id="chatbox">
+        <div class="headerbox">
+          <a href="/">
+            <img
+              src="/static/img/logo.png"
+              alt=""
+              class="logo"
+              class="d-inline-block align-text-top"
+            />
+          </a>
+          <button class="chat__custom back-btn" onclick="back()">
+            <span class="material-symbols-outlined"> keyboard_backspace </span>
+          </button>
+        </div>
+        <ul class="area"></ul>
+      </main>
+    </div>
+    <script src="/static/js/socket/roomlist.js"></script>
+  </body>
+</html>

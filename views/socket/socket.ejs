@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <%-include("../link.ejs")%>
+    <link rel="stylesheet" href="/static/css/socket/socket.css" />
+  </head>
+  <body>
+    <div class="scene flex">
+      <section id="chatbox">
+        <div class="headerbox">
+          <a href="/">
+            <img
+              src="/static/img/logo.png"
+              alt=""
+              class="logo"
+              class="d-inline-block align-text-top"
+            />
+          </a>
+          <button class="chat__custom back-btn" onclick="back()">
+            <span class="material-symbols-outlined"> keyboard_backspace </span>
+          </button>
+        </div>
+        <ul id="messages"></ul>
+        <form id="form" action="">
+          <input id="input" autocomplete="off" />
+          <button class="chat__custom">
+            <span class="material-symbols-outlined"> send </span>
+          </button>
+        </form>
+      </section>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      let chatContent = [];
+      let room_id = "<%=room_id%>";
+      let user_name = sessionStorage.getItem("id");
+      axios({
+        url: "/api/content",
+        method: "post",
+        data: { room_id: room_id },
+      }).then((res) => {
+        chatContent = res.data.content.split("/");
+        chatContent.map((el) => {
+          if (el) {
+            const data_list = el.split(".");
+            if (data_list[0] === user_name) myMsg(data_list[1], data_list[2]);
+            else otherMsg(el);
+          }
+        });
+      });
+
+      let socket = io.connect();
+      socket.emit("create", `room${room_id}`);
+      socket.on("db message", (data) => {
+        chatContent.push(data.msg);
+        let content = chatContent.join("/");
+        axios({
+          url: "/api/content/update",
+          method: "post",
+          data: {
+            room_id: room_id,
+            content: content,
+          },
+        }).then((res) => {});
+      });
+    </script>
+    <script src="/static/js/socket/socket.js"></script>
+  </body>
+</html>

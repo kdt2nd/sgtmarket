@@ -1,0 +1,96 @@
+* {
+  margin: 0;
+}
+a {
+  color: black;
+}
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  width: 340px;
+  margin: 0 auto;
+}
+.write-login {
+  text-align: center;
+  margin: 15px 0;
+  font-size: 1.5rem;
+}
+.login-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.login-box > input {
+  height: 51px;
+  font-size: 0.8rem;
+  padding-left: 9px;
+  margin: 8px 0;
+}
+.find {
+  display: flex;
+  justify-content: right;
+  margin: 7px 0;
+}
+.find > a {
+  font-size: 0.8rem;
+  text-decoration: none;
+  margin: 0 4px;
+}
+.button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 8px 0;
+}
+.button > button,
+.kakao-button,
+.naver-button {
+  margin: 8px auto;
+  height: 51px;
+  width: 340px;
+  font-size: 1rem;
+}
+.kakao-button {
+  background-color: #ffeb33;
+}
+.naver-button {
+  background-color: #03c75a;
+  object-fit: contain;
+}
+.naver-button:hover {
+  cursor: pointer;
+}
+.button > div {
+  margin: 8px auto;
+  font-size: 1rem;
+}
+.button > button:hover {
+  cursor: pointer;
+}
+.login-button {
+  background-color: #eb8d00;
+  color: white;
+  border: none;
+}
+.signup-button {
+  background-color: white;
+  color: #eb8d00;
+  border: 1px solid #eb8d00;
+}
+.kakao-button:hover {
+  cursor: pointer;
+}
+.id-input,
+.pw-input,
+.login-button,
+.signup-button,
+.kakao-button,
+.naver-button {
+  border-radius: 10px;
+}
+.id-input,
+.pw-input {
+  border: 1px solid rgb(118, 118, 118);
+}

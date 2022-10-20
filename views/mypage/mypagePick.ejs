@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%-include("../link.ejs")%>
+    <link href="/static/css/user/mypage-pick.css" rel="stylesheet" />
+    <title>SGT - 찜한 상품</title>
+  </head>
+  <body>
+    <%-include("../main/navbar.ejs")%>
+
+    <div class="wrapper">
+      <div class="left-sgt">
+        <div>마이 SGT</div>
+        <ul class="left-sgt-button">
+          <button type="button" class="hover" onclick="mypage();">
+            상품 목록
+          </button>
+          <button type="button" class="hover">거래 내역</button>
+          <button type="button" class="hover" onclick="mypick();">
+            찜한 상품
+          </button>
+          <button type="button" class="hover" onclick="myfix();">
+            개인 정보 수정
+          </button>
+          <button type="button" class="withDraw">회원탈퇴</button>
+          <!-- 모달 창 -->
+          <div id="myModal" class="modal2 hidden">
+            <!-- 모달 창 내용 -->
+            <div class="modal2-bgr"></div>
+            <div class="modal2-content">
+              <h2>정말 탈퇴하시겠습니까?</h2>
+              <div class="modal-btn">
+                <button type="button" class="yes">예</button>
+                <button type="button" class="no">닫기</button>
+              </div>
+            </div>
+          </div>
+        </ul>
+      </div>
+      <div class="right-sgt">
+        <div class="right-top">
+          <div class="right-sgt-top">찜한 상품 목록</div>
+        </div>
+        <hr />
+        <div class="right-sgt-content">
+          <div class="pickList"></div>
+          <button id="noModalOn" class="cursor" onclick="goPick()" hidden>
+            상품 찜 하기
+          </button>
+          <div class="no-item">
+            <div>찜한 상품이 없습니다.</div>
+          </div>
+          <form class="myModal">
+            <div>
+              <div class="addTitle">상품 등록</div>
+            </div>
+            <input
+              type="text"
+              placeholder="상품 이름"
+              name="title"
+              class="title"
+            />
+            <input
+              type="text"
+              oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+              placeholder="가격"
+              name="price"
+              class="price"
+            />
+            <textarea
+              placeholder="상품 설명"
+              name="content"
+              class="content"
+            ></textarea>
+            <div class="select">
+              <select class="category">
+                <option value="life">생활/가전</option>
+                <option value="electro">전자제품</option>
+                <option value="fashion">패션/의류</option>
+                <option value="interior">가구/인테리어</option>
+                <option value="book">도서/음반/티켓</option>
+                <option value="food">식품/잡화</option>
+                <option value="pet">반려동물</option>
+              </select>
+              <div class="upload-img">
+                <input
+                  type="text"
+                  class="upload-name"
+                  placeholder="이미지를 업로드하세요"
+                  disabled
+                />
+                <label for="img">상품 사진 선택</label>
+                <input
+                  type="file"
+                  onchange="imgname()"
+                  id="img"
+                  name="img"
+                  class="img"
+                  accept="image/png, image/jpeg"
+                  multiple
+                />
+              </div>
+            </div>
+            <div class="itemAdd">
+              <button
+                type="button"
+                class="addItemBtn cursor"
+                onclick="modalAddItem()"
+              >
+                상품 등록
+              </button>
+              <button
+                type="button"
+                class="addFixBtn cursor d-none"
+                onclick="modalFixItem()"
+              >
+                상품 수정
+              </button>
+              <div class="modalClose cursor" onclick="modalClose();">닫기</div>
+            </div>
+          </form>
+          <div class="right-sgt-bottom"></div>
+        </div>
+      </div>
+    </div>
+    <%-include("../main/footer.ejs")%>
+
+    <script src="/static/js/mypage/mypagePick.js"></script>
+  </body>
+</html>
